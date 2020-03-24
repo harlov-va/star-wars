@@ -12,31 +12,31 @@
       <ul class="popup__details">
         <li class="item">
           <div class="item__prop">
-            <img src="@/assets/birthyear-icon.svg" alt="Birth year" /> Birth year
+            <img src="../assets/birthyear-icon.svg" alt="Birth year" /> Birth year
           </div>
           <div class="item__value">{{character.birth_year}}</div>
         </li>
         <li class="item">
           <div class="item__prop">
-            <img src="@/assets/species-icon.svg" alt="Species" /> Species
+            <img src="../assets/species-icon.svg" alt="Species" /> Species
           </div>
           <div class="item__value">{{character.species}}</div>
         </li>
         <li class="item">
           <div class="item__prop">
-            <img src="@/assets/gender-icon.svg" alt="Gender" /> Gender
+            <img src="../assets/gender-icon.svg" alt="Gender" /> Gender
           </div>
           <div class="item__value">{{character.gender}}</div>
         </li>
         <li class="item">
           <div class="item__prop">
-            <img src="@/assets/homeworld-icon.svg" alt="Homeworld" /> Homeworld
+            <img src="../assets/homeworld-icon.svg" alt="Homeworld" /> Homeworld
           </div>
           <div class="item__value">{{character.homeworld}}</div>
         </li>
         <li>
           <div class="prop-film">
-            <img src="@/assets/films-icon.svg" alt="Films" /> Films
+            <img src="../assets/films-icon.svg" alt="Films" /> Films
           </div>
           <div class="value-film" v-for="film of character.films" :key="film">{{film}}</div>
         </li>
