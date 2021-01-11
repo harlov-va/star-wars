@@ -1,4 +1,4 @@
-const SERVER_URL = `https://swapi.co/api/people`;
+const SERVER_URL = `https://swapi.dev/api/people`;
 
 const checkStatus = (response) => {
     if (response.ok) {
