@@ -10,6 +10,8 @@ const checkStatus = (response) => {
 
 const toJSON = (res) => res.json();
 
+const addHTTPS = (url) => url.indexOf(`https`) ? url : url.replace(`http`,`https`);
+
 export default class Loader {
     static async loadData(queryObject) {
         let stringRequest = ``;
@@ -31,7 +33,7 @@ export default class Loader {
     static async load(url) {
         let result;
         try {
-            const response = checkStatus(await fetch(url));            
+            const response = checkStatus(await fetch(addHTTPS(url)));            
             result = toJSON(response);
         }
         catch (e) {
