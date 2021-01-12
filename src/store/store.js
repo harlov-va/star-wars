@@ -108,8 +108,8 @@ export default new Vuex.Store({
       dispatch(`onLoad`);
       try {
         const res = await Loader.loadData(payload);
-        const species = res.results.map((item) => Loader.load(item.species));
-        const speciesArray = await Promise.all(species);
+        const species = res.results.map((item) => item.species.length > 0 ? Loader.load(item.species) : Promise.resolve(``));                
+        const speciesArray = await Promise.all(species);        
         for(let i = 0; i<speciesArray.length; i++) {
           res.results[i].species = speciesArray[i].name;
         }
@@ -125,7 +125,7 @@ export default new Vuex.Store({
       dispatch(`onLoad`);
       try {
         const res = await Loader.load(state.nextPage);
-        const species = res.results.map((item) => Loader.load(item.species));
+        const species = res.results.map((item) => item.species.length > 0 ? Loader.load(item.species) : Promise.resolve(``));
         const speciesArray = await Promise.all(species);
         for(let i = 0; i<speciesArray.length; i++) {
           res.results[i].species = speciesArray[i].name;
@@ -142,8 +142,8 @@ export default new Vuex.Store({
       try {
         const res = await Loader.load(character);
         const details = res.films.map((filmUrl) => Loader.load(filmUrl));
-        details.push(Loader.load(res.species));
-        details.push(Loader.load(res.homeworld));
+        details.push(res.species.length > 0 ? Loader.load(res.species) : Promise.resolve(``));
+        details.push(res.homeworld.length > 0 ? Loader.load(res.homeworld) : Promise.resolve(``));
         let resultDetails = await Promise.all(details);
         res.films = [];
         resultDetails.forEach((elem) => {

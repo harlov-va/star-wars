@@ -31,7 +31,7 @@ export default class Loader {
     static async load(url) {
         let result;
         try {
-            const response = checkStatus(await fetch(url));
+            const response = checkStatus(await fetch(url));            
             result = toJSON(response);
         }
         catch (e) {
