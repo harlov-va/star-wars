@@ -10,7 +10,10 @@ const checkStatus = (response) => {
 
 const toJSON = (res) => res.json();
 
-const addHTTPS = (url) => url.indexOf(`https`) ? url : url.replace(`http`,`https`);
+const addHTTPS = (urls) => {
+    if (Array.isArray(urls)) return urls.map((url) => url.indexOf(`https`) !== -1 ? url : url.replace(`http`,`https`))
+    else return urls.indexOf(`https`) !== -1 ? urls : urls.replace(`http`,`https`); 
+}
 
 export default class Loader {
     static async loadData(queryObject) {
