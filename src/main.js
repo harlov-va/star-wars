@@ -8,7 +8,7 @@ new Vue({
   store,
   render: h => h(App),
   created() {
-    this.$store.dispatch(`getCharacters`);
+    this.$store.dispatch(`getFakeCharacters`);
     window.onscroll = () => {
       let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
       

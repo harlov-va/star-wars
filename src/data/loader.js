@@ -1,3 +1,4 @@
+import {addHTTPS} from './utils';
 const SERVER_URL = `https://swapi.dev/api/people`;
 
 const checkStatus = (response) => {
@@ -9,11 +10,6 @@ const checkStatus = (response) => {
 };
 
 const toJSON = (res) => res.json();
-
-const addHTTPS = (urls) => {
-    if (Array.isArray(urls)) return urls.map((url) => url.indexOf(`https`) !== -1 ? url : url.replace(`http`,`https`))
-    else return urls.indexOf(`https`) !== -1 ? urls : urls.replace(`http`,`https`); 
-}
 
 export default class Loader {
     static async loadData(queryObject) {
@@ -34,9 +30,10 @@ export default class Loader {
         return result;
     }
     static async load(url) {
+        const urlWithHTTPS = addHTTPS(url);
         let result;
         try {
-            const response = checkStatus(await fetch(addHTTPS(url)));            
+            const response = checkStatus(await fetch(urlWithHTTPS));            
             result = toJSON(response);
         }
         catch (e) {

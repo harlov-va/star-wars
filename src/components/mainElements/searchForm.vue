@@ -4,7 +4,7 @@
   >
     <input
       class="search-form__input"      
-      placeholder="Search by name"
+      placeholder="Search by namey"
       v-model="input"
       ref="inputSearch" 
       @keyup="onSearch"     

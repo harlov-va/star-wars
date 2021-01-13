@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Loader from '../data/loader';
+import { mockCharacters } from '../data/mock';
 
 Vue.use(Vuex);
 
@@ -108,6 +109,23 @@ export default new Vuex.Store({
       dispatch(`onLoad`);
       try {
         const res = await Loader.loadData(payload);
+        const species = res.results.map((item) => item.species.length > 0 ? Loader.load(item.species) : Promise.resolve(``));                
+        const speciesArray = await Promise.all(species);        
+        for(let i = 0; i<speciesArray.length; i++) {
+          res.results[i].species = speciesArray[i].name;
+        }
+        commit('setCharacters', res.results);
+        if (!payload) commit(`setNextPage`, res.next);
+      } finally {
+        commit(`endLoad`, true);
+      }
+    },
+    async getFakeCharacters({commit, dispatch}, payload) {
+      commit(`setfilter`, payload);
+      commit(`endLoad`, false);
+      dispatch(`onLoad`);
+      try {
+        const res = Object.assign(mockCharacters);
         const species = res.results.map((item) => item.species.length > 0 ? Loader.load(item.species) : Promise.resolve(``));                
         const speciesArray = await Promise.all(species);        
         for(let i = 0; i<speciesArray.length; i++) {
